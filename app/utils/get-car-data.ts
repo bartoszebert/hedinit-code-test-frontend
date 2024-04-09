@@ -211,12 +211,12 @@ export const getCars = async () => {
   return mockCarData.cars;
 };
 
-export const getCarDetails = async (id: string) => {
+export const getCarDetails = async (href: string) => {
   await new Promise((resolve) => {
     setTimeout(resolve, 200);
   });
 
-  return mockCarData.cars.find((el) => el.id === id);
+  return mockCarData.cars.find((el) => el.link.href === href);
 };
 
 export const getCarsByType = async (type: string) => {

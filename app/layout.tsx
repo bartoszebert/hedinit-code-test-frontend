@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="en">
       <body className="flex flex-col w-full justify-center">
@@ -27,4 +27,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

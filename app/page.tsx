@@ -1,9 +1,11 @@
 import CarList from "./components/CarList";
 
-export default async function Home() {
+const HomePage = () => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <CarList />
     </main>
   );
-}
+};
+
+export default HomePage;
