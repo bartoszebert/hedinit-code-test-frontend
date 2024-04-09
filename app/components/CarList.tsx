@@ -1,34 +1,40 @@
-import Link from "next/link";
-import { ICarItem } from "../interfaces/ICarItem";
-import { getCars } from "../utils/get-car-data";
-import Image from "next/image";
+"use client";
 
-const CarList = async () => {
-  const carItems: ICarItem[] = await getCars();
+import { useEffect, useState } from "react";
+import { ICarItem } from "../interfaces/ICarItem";
+import Filter from "./Filter";
+import CarListItem from "./CarListItem";
+
+interface ICarListProps {
+  carList: ICarItem[];
+}
+
+const CarList = ({ carList }: ICarListProps) => {
+  const [carItems, setCarItems] = useState<ICarItem[]>(carList);
+  const [filter, setFilter] = useState<string | null>(null);
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setFilter(value === "-- Select Filter --" ? null : value);
+  };
+
+  useEffect(() => {
+    const filteredItems = filter
+      ? carList.filter((car) => car.vehicleType === filter)
+      : carList;
+
+    setCarItems(filteredItems);
+  }, [filter, carList]);
 
   return (
-    <div className="grid lg:grid-cols-3 gap-5">
-      {carItems.map((car) => (
-        <Link
-          href={car.link.href}
-          className="flex flex-col min-w-[280px] bg-white pb-8 shadow-xl ring-1 ring-gray-900/5"
-          key={car.id}
-        >
-          <div className="w-full h-[200px] relative">
-            <Image
-              className="w-full h-auto object-cover"
-              src="/carimage.jpg"
-              alt={car.title}
-              fill={true}
-              priority={true}
-              sizes="300px"
-            />
-          </div>
-          <div className="px-6">
-            <h3>{car.link.title}</h3>
-          </div>
-        </Link>
-      ))}
+    <div>
+      <Filter handleFilterChange={handleFilterChange} />
+
+      <div className="grid lg:grid-cols-3 gap-5">
+        {carItems.map((car) => (
+          <CarListItem car={car} key={car.id} />
+        ))}
+      </div>
     </div>
   );
 };

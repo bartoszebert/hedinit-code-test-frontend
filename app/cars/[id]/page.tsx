@@ -9,16 +9,18 @@ export async function generateStaticParams() {
   }));
 }
 
-const CarPage = async ({ params }: { params: { id: string } }) => {
+const CarDetailsPage = async ({ params }: { params: { id: string } }) => {
   const carSlug = `/cars/${params.id}`;
   const carDetails = await getCarDetails(carSlug)!;
 
   return (
-    <div className="flex min-h-screen flex-col items-center p-24 prose-sm">
+    <div className="flex flex-col items-center p-24 prose-sm">
       <h1>Car: {carDetails?.title}</h1>
-      <Link href="/">Back to cars</Link>
+      <Link className="bg-yellow-300 p-2 mt-3 p-2 px-4" href="/">
+        Back to cars
+      </Link>
     </div>
   );
 };
 
-export default CarPage;
+export default CarDetailsPage;
