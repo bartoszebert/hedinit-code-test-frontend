@@ -218,11 +218,3 @@ export const getCarDetails = async (href: string) => {
 
   return mockCarData.cars.find((el) => el.link.href === href);
 };
-
-export const getCarsByType = async (type: string) => {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 200);
-  });
-
-  return mockCarData.cars.find((el) => el.vehicleType === type);
-};
