@@ -15,8 +15,8 @@ const CarListItem = ({ car }: ICarListItemProps) => {
           src="/carimage.jpg"
           alt={car.title}
           fill={true}
-          priority={true}
-          sizes="300px"
+          priority={false}
+          sizes="(max-width: 599px) 100vw, 280px"
         />
       </div>
       <div className="px-3 max-w-[280px]">
