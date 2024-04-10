@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ICarItem } from "../interfaces/ICarItem";
 import Filter from "./Filter";
@@ -12,13 +13,22 @@ interface ICarListProps {
 type TVehicleType = "PB" | "SU";
 
 const CarList = ({ carList }: ICarListProps) => {
-  const [carItems, setCarItems] = useState<ICarItem[]>(carList);
-  const [filter, setFilter] = useState<TVehicleType | null>(null);
+  const router = useRouter();
+  const params = useSearchParams();
+  const filter = params.get("filter");
+
+  const [carItems, setCarItems] = useState<ICarItem[]>([]);
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    console.log(e.target.value);
-    setFilter(value === '-- Select Filter --' ? null : (value as TVehicleType));
+    const filterValue =
+      value === "-- Select Filter --" ? null : (value as TVehicleType);
+
+    if (!filterValue) {
+      router.push("/");
+    } else {
+      router.push(`?filter=${filterValue}`);
+    }
   };
 
   useEffect(() => {
