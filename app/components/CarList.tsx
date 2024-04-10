@@ -9,13 +9,16 @@ interface ICarListProps {
   carList: ICarItem[];
 }
 
+type TVehicleType = "PB" | "SU";
+
 const CarList = ({ carList }: ICarListProps) => {
   const [carItems, setCarItems] = useState<ICarItem[]>(carList);
-  const [filter, setFilter] = useState<string | null>(null);
+  const [filter, setFilter] = useState<TVehicleType | null>(null);
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    setFilter(value === "-- Select Filter --" ? null : value);
+    console.log(e.target.value);
+    setFilter(value === '-- Select Filter --' ? null : (value as TVehicleType));
   };
 
   useEffect(() => {
