@@ -8,7 +8,7 @@ interface ICarListItemProps {
 
 const CarListItem = ({ car }: ICarListItemProps) => {
   return (
-    <div className="flex flex-col min-w-[280px] bg-white pb-8 shadow-xl ring-1 ring-gray-900/5">
+    <article className="flex flex-col min-w-[280px] bg-white pb-8 shadow-xl ring-1 ring-gray-900/5">
       <div className="w-full h-[200px] relative">
         <Image
           className="w-full h-auto object-cover"
@@ -27,7 +27,7 @@ const CarListItem = ({ car }: ICarListItemProps) => {
       <div className="flex flex-col items-end mr-4">
         <AppLink href={car.link.href} title={car.link.title} />
       </div>
-    </div>
+    </article>
   );
 };
 export default CarListItem;
